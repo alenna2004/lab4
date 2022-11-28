@@ -48,8 +48,9 @@ int main(void){
 	int n_s = 10;
 	int num_strings = 0;
 	int cur_len = n_s;
-	char **p = malloc(n_s*sizeof(char*)) ;
-	while(1){
+	char **p = malloc(n_s*sizeof(char*));
+	char *line;
+	while(scanf("", &line)){
 		char *line = readline("");
 		if (line){
 			num_strings += 1;
