@@ -5,12 +5,12 @@
 
 void *myrealloc(void *p, int new_size){
 	char *new_p = (char *)malloc(new_size);
-	mem_cpy(new_p, p, new_size);
+	memcpy(new_p, p, new_size);
 	free(p);
 	return new_p;
 }
 
-void *mem_cpy(void *dest, const void *src, int n){
+void *memcpy(void *dest, const void *src,unsigned long int n){
 	char *cdest = (char*)dest;
 	char *csrc = (char*)src;
 	for (int i = 0; i<n; i++){
@@ -19,8 +19,8 @@ void *mem_cpy(void *dest, const void *src, int n){
 	return (void*)cdest;
 }
 
-int str_len(const char *s){
-	int len = 0;
+unsigned long int strlen(const char *s){
+	unsigned long int len = 0;
 	while(*(s+len)!='\0'){
 		len+=1;
 	}
@@ -28,9 +28,9 @@ int str_len(const char *s){
 }
 
 
-char *str_cat(char *dest, const char *app){
-	int len1 = str_len(dest);
-	int len2 = str_len(app);
+char *strcat(char *dest, const char *app){
+	int len1 = strlen(dest);
+	int len2 = strlen(app);
 	int new_len = len1 + len2;
 	int i=0;
 	while (i<len2){
@@ -44,7 +44,7 @@ char *str_cat(char *dest, const char *app){
 
 
 
-char *get_line(const char *prompt){
+char *readline(const char *prompt){
 	printf("%s", prompt);
 	int n, len = 0;
 	int L = 80;
@@ -55,6 +55,7 @@ char *get_line(const char *prompt){
 		n = scanf("%80[^\n]%", buf);
 		if (n<0){
 			free(ptr);
+			printf("\n");
 			ptr = NULL;
 			continue;
 		}
@@ -62,9 +63,9 @@ char *get_line(const char *prompt){
 			scanf("%*c");
 		}
 		else{
-			len += str_len(buf);
+			len += strlen(buf);
 			ptr = (char*)myrealloc(ptr,(len+1)*sizeof(char));
-			str_cat(ptr, buf);
+			strcat(ptr, buf);
 		}
 	}
 	while(n>0);

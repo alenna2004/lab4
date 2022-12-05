@@ -2,9 +2,10 @@
 #include <readline/readline.h>
 #include <string.h>
 #include <stdlib.h>
+#define N 3
 
 
-char *str_work(const char *str, int N){
+char *str_work(const char *str){
 	int total_len = 0;
 	int word_len = 0;
 	char *word = (char*)malloc((N+1)*sizeof(char));
@@ -51,11 +52,10 @@ char *str_work(const char *str, int N){
 
 
 int main(void){
-	int N = 3;
 	char *line = readline("Enter the line: ");
 	while(line){
 		printf("\"%s\"\n", line);
-		char * new_line = str_work(line, N);
+		char * new_line = str_work(line);
 		printf("\"%s\"\n", new_line);
 		free(line);
 		free(new_line);

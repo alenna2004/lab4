@@ -2,9 +2,9 @@
 # define MYSTR
 
 
-char *get_line(const char *prompt);
-int str_len(const char *s);
-void *mem_cpy(void *dest, const void *src, int n);
+char *readline(const char *prompt);
+unsigned long int strlen(const char *s);
+void *memcpy(void *dest, const void *src, unsigned long int n);
 void *myrealloc(void *p, int  new_size);
 
 #endif

@@ -1,9 +1,10 @@
 #include <stdio.h>
 #include "mystr.h"
 #include <stdlib.h>
+#define N 3
 
 
-char *str_work(const char *str, int N){
+char *str_work(const char *str){
 	int total_len = 0;
 	int word_len = 0;
 	char *word = (char*)malloc((N+1)*sizeof(char));
@@ -11,7 +12,7 @@ char *str_work(const char *str, int N){
 		printf("Failed to allocate memory");
 		return NULL;
 	}
-	int s_len = str_len(str);
+	int s_len = strlen(str);
 	char *new_line = (char*)malloc((s_len*2)*sizeof(char));
 	if(!new_line){
 		printf("Failed to allocate memory");
@@ -27,7 +28,7 @@ char *str_work(const char *str, int N){
 			if (word_len != 0){
 				word[word_len] = ' ';
 				word_len+=1;
-				mem_cpy(new_line+total_len, word, word_len);
+				memcpy(new_line+total_len, word, word_len);
 				total_len +=word_len;
 				word_len = 0;
 				if(str[i] != ' '&&str[i] != '\t'){
@@ -50,15 +51,14 @@ char *str_work(const char *str, int N){
 
 
 int main(void){
-	int N = 3;
-	char *line = get_line("Enter the line: ");
+	char *line = readline("Enter the line: ");
 	while(line){
 		printf("\"%s\"\n", line);
-		char * new_line = str_work(line, N);
+		char * new_line = str_work(line);
 		printf("\"%s\"\n", new_line);
 		free(line);
 		free(new_line);
-		line = get_line("Enter the line: ");
+		line = readline("Enter the line: ");
 	}
 	return 0;
 }
